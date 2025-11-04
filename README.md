@@ -24,10 +24,8 @@ Create a .env file in the /server directory for backend configuration (e.g., MON
 Build images and start all services (Client, Server, MongoDB) in detached mode:
 
 ```bash
-docker compose up -d --build
+docker compose -f docker-compose.dev.yml up --build
 ```
-
-
     Note: The -d flag runs containers in the background, and --build ensures your latest code is compiled into the images.
 
 ## 🌐 Access & Development

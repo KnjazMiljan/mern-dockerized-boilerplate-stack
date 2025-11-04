@@ -22,9 +22,9 @@ cd /app
 
 fi
 
-if [ ! -d node_modules ]; then
-echo "--- node_modules folder missing. Running npm install ---"
-npm install
+if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install
 fi
 
 if [ ! -f node_modules/vite/bin/vite.js ]; then
