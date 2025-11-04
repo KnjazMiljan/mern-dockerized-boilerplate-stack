@@ -1,0 +1,72 @@
+services:
+  # 1. MongoDB Service (unchanged)
+  mongo:
+    image: mongo:latest
+    container_name: mongodb-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: myuser
+      MONGO_INITDB_ROOT_PASSWORD: mypassword
+    networks:
+      - mern-net-dev
+
+  # 2. Backend (Node/Express) Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: backend-api-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      # Use a named volume for node_modules to prevent overwriting
+      - backend_modules:/app/node_modules
+    environment:
+      DB_URL: "mongodb://myuser:mypassword@mongo:27017/mydatabase?authSource=admin"
+    networks:
+      - mern-net-dev
+    depends_on:
+      - mongo
+
+  # 3. Frontend (React) Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev # Must point to the updated file
+    container_name: frontend-client-dev
+    ports:
+      # Map host port 5173 to container port 5173
+      - "5173:5173"
+    volumes:
+      # CRITICAL: This bind mount syncs the files back to your host machine
+      - ./frontend:/app
+      - /app/node_modules
+      # 2. Use a NAMED VOLUME for node_modules
+      - frontend_modules:/app/node_modules # <-- ADD THIS LINE
+    environment:
+      # Required for Vite HMR to work correctly in a Docker container
+      VITE_HMR_HOST: localhost
+      VITE_HMR_PORT: 5173
+    networks:
+      - mern-net-dev
+    depends_on:
+      - backend
+
+# Define the network
+networks:
+  mern-net-dev:
+    driver: bridge
+
+# Define the named volume
+volumes:
+  mongo-data:
+    driver: local
+  backend_modules:
+    driver: local
+  # 2. Declare the named volume globally
+  frontend_modules:
+    driver: local
