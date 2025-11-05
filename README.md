@@ -23,6 +23,13 @@ docker compose -f docker-compose.dev.yml up --build  -d
 ```
     Note: The -d flag runs containers in the background, and --build ensures your latest code is compiled into the images.
 
+### 3. Optional: Avoid confusion in Webstorm IDE:
+
+```bash
+docker run --rm -v ./backend:/app -w /app node:22-alpine npm install
+```
+This command will install all dependencies for the backend on the host machine, so that Webstorm IDE can properly resolve imports.
+
 ## 🌐 Access & Development
 
 This setup provides hot reloading for both your React frontend and Node/Express backend, making the development loop efficient.
