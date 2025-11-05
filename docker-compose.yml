@@ -1,53 +1,39 @@
-# This file is for a production-like setup.
-# For development (with hot-reloading), the setup would be different.
 services:
-  # 1. MongoDB Service
   mongo:
-    image: mongo:latest # Use the official image
+    image: mongo:latest
     container_name: mongodb
     ports:
-      - "27017:27017" # Expose to host machine for development/debugging
+      - "27017:27017"
     volumes:
-      - mongo-data:/data/db # Persist data in a named volume
+      - mongo-data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: myuser
       MONGO_INITDB_ROOT_PASSWORD: mypassword
     networks:
       - mern-net
-
-  # 2. Backend (Node/Express) Service
   backend:
-    build: ./backend # Path to backend Dockerfile
+    build: ./backend
     container_name: backend-api
     ports:
-      - "5000:5000" # Expose the backend port
+      - "5000:5000"
     environment:
-      # Use service names to connect
       DB_URL: "mongodb://myuser:mypassword@mongo:27017/mydatabase?authSource=admin"
-      # Add other necessary env variables
-      # NODE_ENV: production
     networks:
       - mern-net
     depends_on:
-      - mongo # Wait for mongo to be ready
-
-  # 3. Frontend (React/Nginx) Service
+      - mongo
   frontend:
-    build: ./frontend # Path to frontend Dockerfile
+    build: ./frontend
     container_name: frontend-client
     ports:
-      - "80:80" # Expose Nginx port
+      - "80:80"
     networks:
       - mern-net
     depends_on:
-      - backend # Wait for the backend
-
-# Define the network
+      - backend
 networks:
   mern-net:
     driver: bridge
-
-# Define the named volume for persistence
 volumes:
   mongo-data:
     driver: local
