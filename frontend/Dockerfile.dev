@@ -16,5 +16,5 @@ RUN chmod +x entrypoint.sh
 EXPOSE 5173
 
 # Use entrypoint if you have it, otherwise use CMD
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
 # Or if no entrypoint: CMD ["npm", "run", "dev", "--", "--host"]

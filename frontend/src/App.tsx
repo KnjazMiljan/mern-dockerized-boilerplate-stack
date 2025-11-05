@@ -55,8 +55,8 @@ function App() {
 
     return (
         <div className="container">
-            <h1>Book Management</h1>
-            <div>
+            <h1 className={"font-bold"}>Book Management</h1>
+            <div className="m-3 border rounded-lg p-4">
                 <form onSubmit={handleSave} className="book-form">
                     <h3>{editingId ? 'Edit Book' : 'Add New Book'}</h3>
                     <input
