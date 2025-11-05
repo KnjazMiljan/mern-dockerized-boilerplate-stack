@@ -1,15 +1,22 @@
 {
-  "name": "backend",
+  "name": "backend-api",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "node --watch --loader ts-node/esm src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.5.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.8.6",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
   }
 }

@@ -14,17 +14,12 @@
 git clone https://github.com/KnjazMiljan/mern-dockerized-boilerplate-stack.git
 cd mern-dockerized-boilerplate-stack
 ```
-
-### 2. Environment Setup
-
-Create a .env file in the /server directory for backend configuration (e.g., MONGO_URI=mongodb://mongo:27017/mern_db).
-
-### 3. Build & Run (Single Command)
+### 2. Build & Run (Single Command)
 
 Build images and start all services (Client, Server, MongoDB) in detached mode:
 
 ```bash
-docker compose -f docker-compose.dev.yml up --build
+docker compose -f docker-compose.dev.yml up --build  -d
 ```
     Note: The -d flag runs containers in the background, and --build ensures your latest code is compiled into the images.
 
