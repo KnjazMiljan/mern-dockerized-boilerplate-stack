@@ -2,10 +2,14 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY package*.json ./
+RUN npm install
 
-ENTRYPOINT ["entrypoint.sh"]
+COPY . .
 
-# The default command to run after the entrypoint finishes.
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 5000
+
 CMD ["npm", "run", "dev"]
