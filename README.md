@@ -27,8 +27,9 @@ docker compose -f docker-compose.dev.yml up --build  -d
 
 ```bash
 docker run --rm -v ./backend:/app -w /app node:22-alpine npm install
+docker run --rm -v ./frontend:/app -w /app node:22-alpine npm install
 ```
-This command will install all dependencies for the backend on the host machine, so that Webstorm IDE can properly resolve imports.
+These commands will install all dependencies for the backend and for the frontend on the host machine, so that Webstorm IDE can properly resolve imports.
 
 ## 🌐 Access & Development
 

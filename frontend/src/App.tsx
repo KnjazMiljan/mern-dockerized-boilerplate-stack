@@ -59,11 +59,13 @@ function App() {
             <div className="container bg-gray-100 p-4 rounded-lg shadow-md">
                 <form onSubmit={handleSave} className="book-form">
                     <h3 className="font-bold text-xl">{editingId ? 'Edit Book' : 'Add New Book'}</h3>
-                    <div className="grid gap-6 mb-6 md:grid-cols-3">
+                    <div className="grid gap-6 my-6 md:grid-cols-3">
                         <div>
                             <label htmlFor="title"
-                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
-                                name</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700"
+                            >
+                                Title
+                            </label>
                             <input type="text"
                                    id="title"
                                    placeholder="Title"
@@ -74,8 +76,10 @@ function App() {
                         </div>
                         <div>
                             <label htmlFor="author"
-                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                                name</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700"
+                            >
+                                Author
+                            </label>
                             <input type="text"
                                    id="author"
                                    placeholder="Author"
@@ -86,7 +90,10 @@ function App() {
                         </div>
                         <div>
                             <label htmlFor="year"
-                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700"
+                            >
+                                Year
+                            </label>
                             <input type="number"
                                    id="year"
                                    placeholder="Year"
